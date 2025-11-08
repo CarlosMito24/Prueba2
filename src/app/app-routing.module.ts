@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NoIngresadoGuard } from './no-ingresado-guard';
+import { IngresadoGuard } from './ingresado-guard';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
   {
     path: '',
     redirectTo: 'login',
@@ -13,19 +11,25 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    canActivate:[NoIngresadoGuard]
   },
   {
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   },
+    {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate: [IngresadoGuard]
+  },
+    {
+    path: 'citas',
+    loadChildren: () => import('./citas/citas.module').then( m => m.CitasPageModule)
+  },
   {
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
-  },
-  {
-    path: 'citas',
-    loadChildren: () => import('./citas/citas.module').then( m => m.CitasPageModule)
   },
 ];
 

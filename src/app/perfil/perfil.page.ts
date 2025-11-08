@@ -30,6 +30,8 @@ export class PerfilPage implements OnInit {
         this.reservaService.limpiarSesionLocal();
         controller.dismiss();
         this.router.navigateByUrl('/login');
+        localStorage.removeItem('ingresado');
+        localStorage.removeItem('token');
       },
       (error) => {
         this.reservaService.limpiarSesionLocal();

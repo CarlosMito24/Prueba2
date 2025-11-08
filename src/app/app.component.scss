@@ -1,0 +1,38 @@
+ion-tab-button {
+  margin: 0 10px;
+  --background: transparent;
+  --border: none;
+  --box-shadow: none;
+}
+
+ion-label{
+  color: #FFF;
+}
+
+ion-icon {
+  color: #FFF;
+}
+
+ion-tab-bar {
+  border-radius: 25px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  margin: 10px auto;
+  box-sizing: border-box;
+  padding: 0 10px;
+  --background: rgba(10, 10, 10, 0.7);
+}
+
+@media (max-width: 400px) {
+  ion-tab-bar {
+    width: 330px;
+    margin: 10px auto;
+  }
+
+  ion-button {
+    width: 100px;
+    height: 40px;
+    margin: 0 10px;
+  }
+}

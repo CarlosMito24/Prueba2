@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="crearUsuario()">
+    <label>Nombres:</label>
+    <input
+      type="text"
+      placeholder="Nombres"
+      [(ngModel)]="usuario.nombres"
+      name="nombres"
+      required
+    />
+
+    <label>Apellidos:</label>
+    <input
+      type="text"
+      placeholder="Apellidos"
+      [(ngModel)]="usuario.apellidos"
+      name="apellidos"
+      required
+    />
+
+    <label>Teléfono:</label>
+    <input
+      type="text"
+      placeholder="0000-0000"
+      [(ngModel)]="usuario.telefono"
+      name="telefono"
+      pattern="\d{4}-\d{4}"
+      maxlength="9"
+      required
+      id="telefono"
+    />
+
+    <label>Fecha de nacimiento:</label>
+    <input
+      type="date"
+      placeholder="DD/MM/YYYY"
+      [(ngModel)]="usuario.fecha_nacimiento"
+      name="fecha_nacimiento"
+      required
+      id="fecha"
+      placeholder="DD/MM/YYYY"
+      min="1900-01-01"
+      max="2100-12-31"
+    />
+
+    <label>Email:</label>
+    <input
+      type="text"
+      placeholder="Ejemplo@correo.com"
+      [(ngModel)]="usuario.email"
+      name="email"
+      required
+    />
+
+    <label>Contraseña:</label>
+    <input
+      type="password"
+      placeholder="Contraseña"
+      [(ngModel)]="usuario.password"
+      name="password"
+      required
+      id="password"
+    />
+
+    <ion-button shape="round" type="submit">
+      <ion-icon slot="start" name="person-add" size="large"></ion-icon
+      >Registrarse</ion-button
+    >
+  </form>
+</ion-content>

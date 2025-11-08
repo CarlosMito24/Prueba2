@@ -1,0 +1,49 @@
+ion-content {
+  --background: linear-gradient(to right, #cdffd8, #94b9ff);
+}
+
+ion-icon {
+  margin-right: 10px;
+}
+
+ion-button {
+  display: block;
+  margin: 10px auto;
+  width: 250px;
+  --color: #fff;
+  --background: #3bb04f;
+}
+
+label {
+  display: block;
+  text-align: center;
+  margin: 10px;
+}
+
+input {
+  border-radius: 25px;
+  width: 300px;
+  margin: 10px auto;
+  height: 40px;
+  display: block;
+  box-shadow: none;
+  border: none;
+  background-color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #000;
+}
+
+img {
+  display: block;
+  margin: 10px auto;
+  object-fit: cover;
+  width: 250px;
+  height: 200px;
+  border-radius: 25px;
+}
+@media (max-width: 400px) {
+  input {
+    width: 300px;
+  }
+}

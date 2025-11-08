@@ -1,3 +1,22 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+
+  <ion-tabs>
+    <ion-tab-bar *ngIf="showMenu" id="menu">
+      <ion-tab-button>
+        <ion-icon name="home" routerLink="/home"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button>
+        <ion-icon name="calendar" routerLink="/citas"></ion-icon>
+        <ion-label>Citas</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button>
+        <ion-icon name="person" routerLink="/perfil"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-app>

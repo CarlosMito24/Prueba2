@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agendar Nueva Cita</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="crearCita()">
+    <label>Fecha de la cita</label>
+    <input type="date" placeholder="DD/MM/YYYY" required name="fecha" [(ngModel)]="cita.fecha" />
+
+    <label>Hora de la cita</label>
+    <input type="time" required name="hora" [(ngModel)]="cita.hora" />
+
+    <label>Selecciona una mascota</label>
+    <select placeholder="Selecciona la mascota para la cita" [(ngModel)]="cita.mascota_id" name="mascota_id" required>
+      <option *ngFor="let mascota of mascotas" [value]="mascota.id">{{mascota.nombre}}</option>
+    </select>
+
+    <label>Selecciona un servicio</label>
+    <select placeholder="Selecciona el motivo de la cita" [(ngModel)]="cita.servicio_id" name="servicio_id" required>
+      <option *ngFor="let servicio of servicios" [value]="servicio.id">{{servicio.nombre}}</option>
+    </select>
+    <ion-button type="submit" shape="round">
+      <ion-icon slot="start" name="calendar"></ion-icon>
+      Agendar Cita
+    </ion-button>
+  </form>
+</ion-content>

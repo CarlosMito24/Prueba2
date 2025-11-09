@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Subir tus mascotas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="crearMascota()">
+    <label>Nombre:</label>
+    <input
+      type="text"
+      placeholder="Nombre"
+      [(ngModel)]="mascota.nombre"
+      name="nombre"
+      required
+    />
+
+    <label>Especie:</label>
+    <input
+      type="text"
+      placeholder="Especie"
+      [(ngModel)]="mascota.especie"
+      name="especie"
+      required
+    />
+
+    <label>Raza:</label>
+    <input
+      type="text"
+      placeholder="Raza"
+      [(ngModel)]="mascota.raza"
+      name="raza"
+      required
+    />
+
+    <label>Edad:</label>
+    <input
+      type="text"
+      [(ngModel)]="mascota.edad"
+      name="edad"
+      required
+      placeholder="Edad"
+    />
+
+    <ion-button shape="round" type="submit">
+      <ion-icon slot="start" name="person-add" size="large"></ion-icon
+      >Subir Mascota</ion-button
+    >
+  </form>
+</ion-content>

@@ -1,3 +1,39 @@
-p{
-    margin: 20px;
+p {
+  margin: 10px 20px;
+}
+
+.servicios {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 25px;
+  width: 350px;
+  background: linear-gradient(to right, #3bb04f, #1ae6bb);
+  margin: 10px auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.imagen-container {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.imagen {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  border-radius: 25px;
+}
+
+.contenido-servicio{
+  padding: 10px 0;
+}
+
+ion-button {
+  --background: red;
+  display: block;
+  margin: 10px auto;
+  width: 300px;
 }

@@ -18,6 +18,7 @@ label {
   display: block;
   text-align: center;
   margin: 10px;
+  color: #000;
 }
 
 input {
@@ -32,6 +33,7 @@ input {
   padding: 10px;
   box-sizing: border-box;
   color: #000;
+  text-align: center;
 }
 
 img {
@@ -42,6 +44,7 @@ img {
   height: 200px;
   border-radius: 25px;
 }
+
 @media (max-width: 400px) {
   input {
     width: 300px;

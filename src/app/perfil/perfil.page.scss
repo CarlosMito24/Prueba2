@@ -3,16 +3,21 @@ ion-icon {
 }
 
 img {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     margin: 10px auto;
     display: block;
-    border-radius: 25px;
+    border-radius: 50%;
 }
 
 ion-button{
     margin: 10px auto;
     display: block;
     width: 350px;
+    color: #FFF;
+}
+
+.cerrar_sesion {
+  --background: #ff3131;
 }

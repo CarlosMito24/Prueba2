@@ -47,20 +47,52 @@ export class Reserva {
   }
 
   getServicios(): Observable<any[]> {
-    const token = localStorage.getItem('token'); // <-- USAMOS 'api_token'
-
-    // Si no hay token, la petición fallará con 401, pero Angular la enviará
-    // a la API para que Laravel devuelva el error 401.
-
+    const token = localStorage.getItem('token');
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`, // <-- ¡TOKEN INYECTADO!
+        Authorization: `Bearer ${token}`,
       }),
     };
 
     const url = this.path_server + 'servicios';
-    // Esperamos un array de servicios
     return this.http.get<any[]>(url, options);
+  }
+
+    getMascotas(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    const url = this.path_server + 'mascotas';
+    return this.http.get<any[]>(url, options);
+  }
+
+  subirMascotas(mascotaData: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    const url = this.path_server + 'mascotas';
+    return this.http.post<any>(url, mascotaData, options);
+  }
+
+  subirCitas(citaData: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    const url = this.path_server + 'citas';
+    return this.http.post<any>(url, citaData, options);
   }
 }

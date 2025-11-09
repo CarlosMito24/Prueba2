@@ -25,11 +25,23 @@ const routes: Routes = [
   },
     {
     path: 'citas',
-    loadChildren: () => import('./citas/citas.module').then( m => m.CitasPageModule)
+    loadChildren: () => import('./citas/citas.module').then( m => m.CitasPageModule),
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'perfil',
-    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule),
+    canActivate: [IngresadoGuard]
+  },
+  {
+    path: 'subirmascotas',
+    loadChildren: () => import('./subirmascotas/subirmascotas.module').then( m => m.SubirmascotasPageModule),
+    canActivate: [IngresadoGuard]
+  },
+  {
+    path: 'crearcita',
+    loadChildren: () => import('./crearcita/crearcita.module').then( m => m.CrearcitaPageModule),
+    canActivate: [IngresadoGuard]
   },
 ];
 

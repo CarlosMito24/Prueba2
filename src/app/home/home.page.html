@@ -9,43 +9,18 @@
     Somos Pet Care SV, una veterinaria y peluqueria para mascotas salvadoreña
     con el propósito de cuidar a tus mascotas y darte un servicio de calidad.
   </p>
-  <p>Puedes contactarnos por cualquier duda al número: 2222-4444</p>
+  <p>Los servicios que ofrecemos son los siguientes</p>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col
-        size="12"
-        size-md="6"
-        size-lg="4"
-        *ngFor="let servicio of servicios"
-      >
-        <ion-card>
-          <img src="" />
-          <ion-card-header>
-            <ion-card-title>{{servicio.nombre}}</ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            <p>Precio: ${{servicio.precio}}</p>
-            <br />
-            <p>
-              Descripcion: <br />
-              {{servicio.descripcion}}
-            </p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <div>
-    <div>
-      <img src="" alt="" />
-    </div>
-    <div>
-      <p></p>
-      <p></p>
-      <p></p>
+  <div *ngFor="let servicio of servicios">
+    <div class="servicios">
+      <div class="imagen-container">
+        <img alt="Imagen del servicio" [src]="'http://127.0.0.1:8000/' + servicio.imagen" class="imagen" />
+      </div>
+      <div class="contenido-servicio">
+        <p><strong>{{servicio.nombre}}</strong></p>
+        <p>{{servicio.descripcion}}</p>
+        <p>Precio: {{servicio.precio}}</p>
+      </div>
     </div>
   </div>
 </ion-content>

@@ -9,6 +9,24 @@
     Somos Pet Care SV, una veterinaria y peluqueria para mascotas salvadoreña
     con el propósito de cuidar a tus mascotas y darte un servicio de calidad.
   </p>
+
+
+  <div *ngFor="let citaspendiente of citaspendientes">
+    <h2>Cita Pendiente </h2>
+    <div class="citaspendientes">
+
+      <div class="imagen-container">
+        <img alt="Imagen de la mascota " class="imagen" />
+      </div>
+      <div class="contenido-cita">
+        <p><strong>Fecha: </strong> {{citaspendiente.fecha}}</p>
+        <p><strong>Hora: </strong> {{citaspendiente.hora}}</p>
+        <p> <strong>Mascota: </strong>{{citaspendiente.mascota.nombre}}</p>
+        <p><strong>Motivo: </strong> {{citaspendiente.servicio.nombre}}</p>
+      </div>
+    </div>
+  </div>
+
   <p>Los servicios que ofrecemos son los siguientes</p>
 
   <div *ngFor="let servicio of servicios">

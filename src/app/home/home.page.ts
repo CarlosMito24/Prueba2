@@ -10,25 +10,53 @@ import { of } from 'rxjs';
   standalone: false,
 })
 export class HomePage implements OnInit {
-  servicios: any[] = []; 
+  servicios: any[] = [];
+  citaspendientes: any[] = [];
   constructor(private reservaService: Reserva) {}
 
   ngOnInit() {
     this.cargarServicios();
+    this.cargarCitasPendientes();
   }
 
   cargarServicios() {
-    this.reservaService.getServicios()
+    this.reservaService
+      .getServicios()
       .pipe(
-        catchError(error => {
-          console.error('Error al cargar servicios. ¿Token expirado o error CORS?', error);
-          this.servicios = []; 
-          return of([]); 
+        catchError((error) => {
+          console.error(
+            'Error al cargar servicios. ¿Token expirado o error CORS?',
+            error
+          );
+          this.servicios = [];
+          return of([]);
         })
       )
       .subscribe((data: any[]) => {
-        this.servicios = data; 
+        this.servicios = data;
         console.log('Servicios cargados correctamente:', this.servicios);
+      });
+  }
+
+  cargarCitasPendientes() {
+    this.reservaService
+      .getCitasPendientes()
+      .pipe(
+        catchError((error) => {
+          console.error(
+            'Error al cargar las citas pendientes. ¿Token expirado o error CORS?',
+            console.error
+          );
+          this.citaspendientes = [];
+          return of([]);
+        })
+      )
+      .subscribe((data: any[]) => {
+        this.citaspendientes = data;
+        console.log(
+          'Citas pendientes cargadas correctamente: ',
+          this.citaspendientes
+        );
       });
   }
 }

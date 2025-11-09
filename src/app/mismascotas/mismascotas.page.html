@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Mis Mascotas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let mascota of mascotas">
+    <div class="mismascotas">
+      <div class="imagen-container">
+        <img alt="Imagen de la mascota " class="imagen" />
+      </div>
+      <div class="contenido-mascota">
+        <p><strong>Nombre: </strong> {{mascota.nombre}}</p>
+        <p><strong>Especie: </strong> {{mascota.especie}}</p>
+        <p> <strong>Raza: </strong>{{mascota.raza}}</p>
+        <p><strong>Edad: </strong> {{mascota.edad}}</p>
+      </div>
+    </div>
+  </div>
+  <ion-button shape="round" routerLink="/subirmascotas">Subir Mascota</ion-button>
+</ion-content>

@@ -7,48 +7,65 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
-    canActivate:[NoIngresadoGuard]
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginPageModule),
+    canActivate: [NoIngresadoGuard],
   },
   {
     path: 'registro',
-    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+    loadChildren: () =>
+      import('./registro/registro.module').then((m) => m.RegistroPageModule),
   },
-    {
+  {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    canActivate: [IngresadoGuard]
+    loadChildren: () =>
+      import('./home/home.module').then((m) => m.HomePageModule),
+    canActivate: [IngresadoGuard],
   },
-    {
+  {
     path: 'citas',
-    loadChildren: () => import('./citas/citas.module').then( m => m.CitasPageModule),
-    canActivate: [IngresadoGuard]
+    loadChildren: () =>
+      import('./citas/citas.module').then((m) => m.CitasPageModule),
+    canActivate: [IngresadoGuard],
   },
   {
     path: 'perfil',
-    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule),
-    canActivate: [IngresadoGuard]
+    loadChildren: () =>
+      import('./perfil/perfil.module').then((m) => m.PerfilPageModule),
+    canActivate: [IngresadoGuard],
   },
   {
     path: 'subirmascotas',
-    loadChildren: () => import('./subirmascotas/subirmascotas.module').then( m => m.SubirmascotasPageModule),
-    canActivate: [IngresadoGuard]
+    loadChildren: () =>
+      import('./subirmascotas/subirmascotas.module').then(
+        (m) => m.SubirmascotasPageModule
+      ),
+    canActivate: [IngresadoGuard],
   },
   {
     path: 'crearcita',
-    loadChildren: () => import('./crearcita/crearcita.module').then( m => m.CrearcitaPageModule),
-    canActivate: [IngresadoGuard]
+    loadChildren: () =>
+      import('./crearcita/crearcita.module').then((m) => m.CrearcitaPageModule),
+    canActivate: [IngresadoGuard],
+  },
+  {
+    path: 'mismascotas',
+    loadChildren: () =>
+      import('./mismascotas/mismascotas.module').then(
+        (m) => m.MismascotasPageModule
+      ),
+    canActivate: [IngresadoGuard],
   },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -11,6 +11,7 @@ export class Reserva {
 
   constructor(public http: HttpClient) {}
 
+  //Pasar Token a pagina login
   login(email: string, password: string) {
     let datos = {
       email: email,
@@ -27,6 +28,7 @@ export class Reserva {
     return this.http.post<LoginResponse>(url, JSON.stringify(datos), options);
   }
 
+  //Pasar Token para logout (perfil)
   logout() {
     const token = localStorage.getItem('token');
 
@@ -46,6 +48,7 @@ export class Reserva {
     localStorage.removeItem('token');
   }
 
+  //Mostrar servicios
   getServicios(): Observable<any[]> {
     const token = localStorage.getItem('token');
     const options = {
@@ -59,7 +62,8 @@ export class Reserva {
     return this.http.get<any[]>(url, options);
   }
 
-    getMascotas(): Observable<any[]> {
+  //Mostrar mascotas
+  getMascotas(): Observable<any[]> {
     const token = localStorage.getItem('token');
     const options = {
       headers: new HttpHeaders({
@@ -72,6 +76,35 @@ export class Reserva {
     return this.http.get<any[]>(url, options);
   }
 
+  //Mostrar Citas Pendientes
+  getCitasPendientes() {
+    const token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    const url = this.path_server + 'citas/pendientes';
+    return this.http.get<any[]>(url, options);
+  }
+
+  //Mostrar Citas Completadas (Historial)
+  getHistorialCitas() {
+    const token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    const url = this.path_server + 'citas/historial';
+    return this.http.get<any[]>(url, options);
+  }
+
+  //Mostrar Mascotas para crear cita
   subirMascotas(mascotaData: any): Observable<any> {
     const token = localStorage.getItem('token');
     const options = {
@@ -84,6 +117,7 @@ export class Reserva {
     return this.http.post<any>(url, mascotaData, options);
   }
 
+  //Crear Citas
   subirCitas(citaData: any): Observable<any> {
     const token = localStorage.getItem('token');
     const options = {

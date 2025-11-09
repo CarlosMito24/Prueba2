@@ -5,8 +5,24 @@
 </ion-header>
 
 <ion-content>
- <div>
-  <img src="../../assets/calendar.png" alt="imagen de crear cita">
-  <ion-button shape="round" routerLink="/crearcita">Crear Cita</ion-button>
- </div>
+  <div class="crear">
+    <img src="../../assets/calendar.png" alt="imagen de crear cita">
+    <ion-button shape="round" routerLink="/crearcita">Crear Cita</ion-button>
+  </div>
+
+  <h2>Historial</h2>
+
+  <div *ngFor="let citacompletada of citascompletadas">
+    <div class="citascompletadas">
+      <div class="imagen-container">
+        <img alt="Imagen de la mascota " class="imagen" />
+      </div>
+      <div class="contenido-cita">
+        <p><strong>Fecha: </strong> {{citacompletada.fecha}}</p>
+        <p><strong>Hora: </strong> {{citacompletada.hora}}</p>
+        <p> <strong>Mascota: </strong>{{citacompletada.mascota.nombre}}</p>
+        <p><strong>Motivo: </strong> {{citacompletada.servicio.nombre}}</p>
+      </div>
+    </div>
+  </div>
 </ion-content>

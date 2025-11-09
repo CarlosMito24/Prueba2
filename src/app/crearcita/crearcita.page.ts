@@ -4,7 +4,6 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-// import axios from 'axios'; <-- Eliminado, ya no es necesario
 
 @Component({
   selector: 'app-crearcita',
@@ -13,9 +12,6 @@ import { Router } from '@angular/router';
   standalone: false,
 })
 export class CrearcitaPage implements OnInit {
-  // Eliminamos 'apiUrl' ya que el servicio Reserva lo maneja.
-
-  // Ajustamos el modelo para usar tipos más estrictos y nullables
   cita = {
     fecha: '',
     hora: '',
@@ -24,7 +20,6 @@ export class CrearcitaPage implements OnInit {
     estado_id: 1,
   };
 
-  // Propiedades para almacenar las listas que se cargan del servidor
   servicios: any[] = [];
   mascotas: any[] = [];
 
@@ -35,16 +30,9 @@ export class CrearcitaPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Es crucial cargar los servicios y otros datos al iniciar
     this.cargarServicios();
     this.cargarMascotas();
-    // Si tienes un endpoint para cargar mascotas o estados, deberías llamarlos aquí:
-    // this.cargarMascotas();
   }
-
-  /**
-   * Carga la lista de servicios disponibles para el select en el formulario.
-   */
   cargarServicios() {
     this.reservaService
       .getServicios()
@@ -84,7 +72,6 @@ export class CrearcitaPage implements OnInit {
   }
 
   crearCita() {
-    // Validación mejorada: verifica si los campos requeridos tienen valor
     if (
       !this.cita.fecha ||
       !this.cita.hora ||
@@ -96,18 +83,18 @@ export class CrearcitaPage implements OnInit {
         'warning'
       );
       return;
-    } // Cambiamos a JSON simple, lo que es mejor para estos datos.
+    }
 
     const citaData = {
-      fecha: this.cita.fecha.split('T')[0], // Limpia el formato de fecha (si viene de ion-datetime)
-      hora: this.cita.hora.split('T')[1]?.substring(0, 5) || this.cita.hora, // Limpia el formato de hora
+      fecha: this.cita.fecha.split('T')[0],
+      hora: this.cita.hora.split('T')[1]?.substring(0, 5) || this.cita.hora,
       mascota_id: this.cita.mascota_id,
       servicios_id: this.cita.servicio_id,
       estado_id: this.cita.estado_id,
     };
 
     this.reservaService
-      .subirCitas(citaData) // Envía el objeto JSON
+      .subirCitas(citaData)
       .pipe(
         catchError((error) => {
           console.error('Error al registrar la cita:', error);
@@ -122,8 +109,8 @@ export class CrearcitaPage implements OnInit {
       )
       .subscribe((response) => {
         if (response) {
-          this.mostrarToast('Cita creada correctamente', 'success'); // Navegación más lógica tras crear la cita (cambiado de '/login')
-          this.router.navigate(['/citas']); // Limpiar formulario
+          this.mostrarToast('Cita creada correctamente', 'success');
+          this.router.navigate(['/citas']);
 
           this.cita = {
             fecha: '',

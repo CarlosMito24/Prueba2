@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, formatDate } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
 import axios from 'axios';
 import { Router } from '@angular/router';
 
@@ -24,11 +21,8 @@ export class RegistroPage implements OnInit {
     password: '',
   };
 
-  usuarios: any[] = [];
-
   constructor(
     private toastCtrl: ToastController,
-    private alertCtrl: AlertController,
     private router: Router
   ) {}
 

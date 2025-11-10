@@ -48,6 +48,34 @@ export class Reserva {
     localStorage.removeItem('token');
   }
 
+  //Obtener datos usuario
+  getUserProfile(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    const url = this.path_server + 'user/profile';
+    return this.http.get<any[]>(url, options);
+  }
+
+  updateUserProfile(userData: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`, // Incluir el token
+      }),
+    };
+    const url = this.path_server + 'user/profile';
+
+    // 💡 La clave es usar this.http.put() y enviar 'userData' en el cuerpo
+    return this.http.put(url, userData, options);
+  }
+
   //Mostrar servicios
   getServicios(): Observable<any[]> {
     const token = localStorage.getItem('token');

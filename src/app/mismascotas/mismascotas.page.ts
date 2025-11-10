@@ -39,6 +39,7 @@ export class MismascotasPage implements OnInit {
       )
       .subscribe((data: any[]) => {
         this.mascotas = data;
+        console.log('Mascotas cargadas correctamente:', this.mascotas);
       });
   }
 

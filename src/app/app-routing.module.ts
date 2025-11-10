@@ -60,6 +60,10 @@ const routes: Routes = [
       ),
     canActivate: [IngresadoGuard],
   },
+  {
+    path: 'actualizarperfil',
+    loadChildren: () => import('./actualizarperfil/actualizarperfil.module').then( m => m.ActualizarperfilPageModule)
+  },
 ];
 
 @NgModule({

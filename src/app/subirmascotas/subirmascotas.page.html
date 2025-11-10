@@ -6,6 +6,13 @@
 
 <ion-content>
   <form (ngSubmit)="crearMascota()">
+     <label>Foto Mascota</label>
+    <input type="file" (change)="onFileChange($event)" />
+    <div *ngIf="imagenPreview" class="ion-margin-top">
+      <p style="text-align: center;">Previsualización:</p>
+      <img [src]="imagenPreview" alt="Previsualización de la imagen"
+        style="width: 250px; height: 250px; object-fit: cover; border: none; border-radius: 25px; display: block; margin: auto;" />
+    </div>
     <label>Nombre:</label>
     <input
       type="text"

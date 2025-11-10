@@ -16,7 +16,7 @@
     <div class="citaspendientes">
 
       <div class="imagen-container">
-        <img alt="Imagen de la mascota " class="imagen" />
+        <img alt="Imagen de la mascota " class="imagen" [src]="'http://127.0.0.1:8000/mascotas/' + citaspendiente.mascota.imagen"/>
       </div>
       <div class="contenido-cita">
         <p><strong>Fecha: </strong> {{citaspendiente.fecha}}</p>
@@ -32,7 +32,7 @@
   <div *ngFor="let servicio of servicios">
     <div class="servicios">
       <div class="imagen-container">
-        <img alt="Imagen del servicio" [src]="'http://127.0.0.1:8000/' + servicio.imagen" class="imagen" />
+        <img alt="Imagen del servicio" [src]="'http://127.0.0.1:8000/servicios/' + servicio.imagen" class="imagen" />
       </div>
       <div class="contenido-servicio">
         <p><strong>{{servicio.nombre}}</strong></p>

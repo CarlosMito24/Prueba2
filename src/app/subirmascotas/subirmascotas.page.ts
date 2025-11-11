@@ -39,7 +39,6 @@ export class SubirmascotasPage implements OnInit {
       reader.onload = (e: any) => {
         this.imagenPreview = e.target.result;
       };
-      // Uso seguro: solo lee si this.imagen no es null
       this.imagen && reader.readAsDataURL(this.imagen);
     }
   }
@@ -72,17 +71,12 @@ export class SubirmascotasPage implements OnInit {
       .subirMascotas(formData)
       .pipe(
         catchError((error) => {
-          console.error('Error al registrar la mascota:', error);
-
           let errorMessage = 'Error de conexión o al procesar la solicitud.';
 
-          // CRUCIAL: 1. Intentar capturar errores de validación de Laravel (código 422)
           if (error.error?.errors) {
             const firstErrorKey = Object.keys(error.error.errors)[0];
             errorMessage = error.error.errors[firstErrorKey][0];
-          }
-          // 2. Capturar el mensaje general (ej: error 401, 500)
-          else if (error.error?.message) {
+          } else if (error.error?.message) {
             errorMessage = error.error.message;
           } else if (error.status === 401) {
             errorMessage =
@@ -90,7 +84,7 @@ export class SubirmascotasPage implements OnInit {
           }
 
           this.mostrarToast(`Fallo en el registro: ${errorMessage}`, 'danger');
-          return of(null); // Retorna un Observable nulo para detener la secuencia
+          return of(null);
         })
       )
       .subscribe((response) => {
@@ -98,7 +92,6 @@ export class SubirmascotasPage implements OnInit {
           this.mostrarToast('Mascota creada correctamente', 'success');
           this.router.navigate(['/mismascotas']);
 
-          // Resetear el estado de la aplicación
           this.imagen = null;
           this.imagenPreview = null;
           this.mascota = {

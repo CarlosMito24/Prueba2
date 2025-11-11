@@ -5,12 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="isLoading">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Cargando datos...</p>
-  </div>
 
-  <form #perfilForm="ngForm" (ngSubmit)="guardarDatos()" *ngIf="!isLoading">
+  <form #perfilForm="ngForm" (ngSubmit)="guardarDatos()">
     <label>Nombre: </label>
     <input [(ngModel)]="usuario.nombres" name="nombres" required type="text" />
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Reserva } from '../../app/services/reserva';
 import { catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { LoadingController } from '@ionic/angular'; // <-- Importamos LoadingController
+import { LoadingController, ToastController } from '@ionic/angular'; // <-- Agregado ToastController
 
 @Component({
   selector: 'app-citas',
@@ -12,11 +12,12 @@ import { LoadingController } from '@ionic/angular'; // <-- Importamos LoadingCon
 })
 export class CitasPage implements OnInit {
   citascompletadas: any[] = [];
-  
+
   constructor(
     private reservaService: Reserva,
-    private loadingCtrl: LoadingController // <-- Inyectamos LoadingController
-  ) { }
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
+  ) {}
 
   ngOnInit() {
     this.cargarCitasCompletadas();
@@ -26,36 +27,43 @@ export class CitasPage implements OnInit {
     this.cargarCitasCompletadas();
   }
 
-  async cargarCitasCompletadas() { // <-- Hacemos la función ASYNC
-    
-    // 1. Mostrar el indicador de carga
+  async cargarCitasCompletadas() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando historial...',
     });
-    await loading.present(); // Muestra el spinner
+    await loading.present();
 
     this.reservaService
       .getHistorialCitas()
       .pipe(
         catchError((error) => {
-          console.error(
-            'Error al cargar el historial de citas.',
-            error
-          );
+          let errorMessage =
+            'Error de conexión. No se pudo cargar el historial.';
+          if (error.status === 401) {
+            errorMessage =
+              'Sesión expirada. Por favor, inicia sesión de nuevo.';
+          }
+          this.mostrarToast(errorMessage, 'danger');
+
           this.citascompletadas = [];
           return of([]);
         }),
-        // 2. Ocultar el indicador al finalizar, sin importar el resultado
-        finalize(() => { 
-          loading.dismiss(); // Oculta el spinner de forma garantizada
-        }) 
+        finalize(async () => {
+          await loading.dismiss();
+        })
       )
       .subscribe((data: any[]) => {
         this.citascompletadas = data;
-        console.log(
-          'Historial de citas cargado correctamente: ',
-          this.citascompletadas
-        );
       });
+  }
+
+  async mostrarToast(mensaje: string, color: string) {
+    const toast = await this.toastCtrl.create({
+      message: mensaje,
+      duration: 3000,
+      color,
+      position: 'bottom',
+    });
+    toast.present();
   }
 }

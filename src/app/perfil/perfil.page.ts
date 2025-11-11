@@ -36,10 +36,6 @@ export class PerfilPage implements OnInit {
       (error) => {
         this.reservaService.limpiarSesionLocal();
         controller.dismiss();
-        console.error(
-          'Error al cerrar sesión en el servidor, limpiando sesión local:',
-          error
-        );
         this.router.navigateByUrl('/login');
       }
     );

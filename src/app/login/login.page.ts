@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
       (res) => {
         controller.dismiss();
         localStorage.setItem('token', res.token);
-        localStorage.setItem('ingresado', "true");
+        localStorage.setItem('ingresado', 'true');
         this.router.navigate(['/home']);
 
         this.user = {
@@ -48,7 +48,6 @@ export class LoginPage implements OnInit {
       },
       (error) => {
         controller.dismiss();
-        console.log(error);
         this.mostrarToast('Credenciales inválidas', 'Error');
       }
     );

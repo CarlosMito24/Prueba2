@@ -19,6 +19,7 @@ const routes: Routes = [
     path: 'registro',
     loadChildren: () =>
       import('./registro/registro.module').then((m) => m.RegistroPageModule),
+    canActivate: [NoIngresadoGuard],
   },
   {
     path: 'home',
@@ -62,11 +63,27 @@ const routes: Routes = [
   },
   {
     path: 'actualizarperfil',
-    loadChildren: () => import('./actualizarperfil/actualizarperfil.module').then( m => m.ActualizarperfilPageModule)
+    loadChildren: () =>
+      import('./actualizarperfil/actualizarperfil.module').then(
+        (m) => m.ActualizarperfilPageModule
+      ),
+    canActivate: [IngresadoGuard],
   },
   {
     path: 'editarcita/:id',
-    loadChildren: () => import('./editarcita/editarcita.module').then( m => m.EditarcitaPageModule)
+    loadChildren: () =>
+      import('./editarcita/editarcita.module').then(
+        (m) => m.EditarcitaPageModule
+      ),
+    canActivate: [IngresadoGuard],
+  },
+  {
+    path: 'editarmascota/:id',
+    loadChildren: () =>
+      import('./editarmascota/editarmascota.module').then(
+        (m) => m.EditarmascotaPageModule
+      ),
+    canActivate: [IngresadoGuard],
   },
 ];
 

@@ -62,7 +62,6 @@ export class RegistroPage implements OnInit {
         password: '',
       };
     } catch (error) {
-      console.error('Error al registrar el usuario:', error);
       const errorMessage =
         (error as any).response?.data?.message ||
         'Error de conexión o del servidor.';

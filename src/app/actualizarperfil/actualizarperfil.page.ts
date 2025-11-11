@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Reserva } from '../../app/services/reserva'; // Asegúrate que esta ruta sea correcta
+import { Reserva } from '../../app/services/reserva';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -21,13 +21,11 @@ export class ActualizarperfilPage implements OnInit {
     password: '',
   };
 
-  isLoading = false; // Controla el spinner de carga
-
   constructor(
     private toastCtrl: ToastController,
     private router: Router,
     private reservaService: Reserva,
-    private loadingCtrl: LoadingController // Añadido para mostrar un indicador de carga
+    private loadingCtrl: LoadingController
   ) {}
 
   ngOnInit() {
@@ -46,8 +44,6 @@ export class ActualizarperfilPage implements OnInit {
         catchError((error) => {
           loading.dismiss();
           this.presentToast('Error al cargar los datos del usuario.', 'danger');
-          console.error('Error al cargar el perfil:', error);
-          this.isLoading = false;
           return of({ data: {} });
         })
       )
@@ -63,18 +59,17 @@ export class ActualizarperfilPage implements OnInit {
               .substring(0, 10);
           }
         }
-
         loading.dismiss();
-        this.isLoading = false;
-        console.log('Datos del usuario cargados correctamente:', this.usuario);
       });
   }
 
   async guardarDatos() {
-    // Validación de minlength si el campo password NO está vacío
     if (this.usuario.password && this.usuario.password.length < 8) {
-        this.presentToast('La contraseña debe tener al menos 8 caracteres.', 'warning');
-        return;
+      this.presentToast(
+        'La contraseña debe tener al menos 8 caracteres.',
+        'warning'
+      );
+      return;
     }
 
     const loading = await this.loadingCtrl.create({
@@ -97,24 +92,20 @@ export class ActualizarperfilPage implements OnInit {
           return of(null);
         })
       )
-      .subscribe(async (response: any) => { // ⚠️ Nota: 'subscribe' debe ser 'async' si usas 'await' dentro
+      .subscribe(async (response: any) => {
         if (response) {
           loading.dismiss();
-          
-          await this.presentToast( // Usar await para esperar que el Toast se muestre
+
+          await this.presentToast(
             response.message || 'Perfil actualizado con éxito.',
             'success'
           );
-
           this.usuario.password = '';
-          
-          // 🚀 PASO CLAVE: Redirigir a la página de perfil
-          // Cambia '/perfil' por la ruta real si es diferente (ej: '/tabs/perfil')
-          this.router.navigate(['/perfil']); 
+          this.router.navigate(['/perfil']);
         }
       });
   }
-  
+
   async presentToast(message: string, color: string) {
     const toast = await this.toastCtrl.create({
       message: message,

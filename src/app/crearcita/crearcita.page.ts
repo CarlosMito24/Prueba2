@@ -38,7 +38,6 @@ export class CrearcitaPage implements OnInit {
       .getServicios()
       .pipe(
         catchError((error) => {
-          console.error('Error al cargar servicios. ¿Token expirado?', error);
           this.mostrarToast(
             'No se pudieron cargar los servicios disponibles.',
             'danger'
@@ -57,7 +56,6 @@ export class CrearcitaPage implements OnInit {
       .getMascotas()
       .pipe(
         catchError((error) => {
-          console.error('Error al cargar mascotas. ¿Token expirado?', error);
           this.mostrarToast(
             'No se pudieron cargar sus mascotas disponibles.',
             'danger'
@@ -97,7 +95,6 @@ export class CrearcitaPage implements OnInit {
       .subirCitas(citaData)
       .pipe(
         catchError((error) => {
-          console.error('Error al registrar la cita:', error);
           const errorMessage =
             error.error?.message ||
             (error.status === 401

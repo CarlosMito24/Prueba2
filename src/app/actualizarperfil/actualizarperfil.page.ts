@@ -21,7 +21,7 @@ export class ActualizarperfilPage implements OnInit {
     password: '',
   };
 
-  isLoading = true; // Controla el spinner de carga
+  isLoading = false; // Controla el spinner de carga
 
   constructor(
     private toastCtrl: ToastController,

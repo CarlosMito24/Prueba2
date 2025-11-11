@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Cita #{{ citaId }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <form [formGroup]="formularioCita" (ngSubmit)="guardarCambios()">
+    
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      
+      <ion-item>
+        <ion-label position="stacked">Fecha</ion-label>
+        <ion-input type="date" formControlName="fecha"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Hora</ion-label>
+        <ion-input type="time" formControlName="hora"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Mascota</ion-label>
+        <ion-select formControlName="mascota_id" interface="popover" placeholder="Selecciona una mascota">
+          <ion-select-option *ngFor="let mascota of mascotas" [value]="mascota.id">
+            {{ mascota.nombre }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Servicio/Motivo</ion-label>
+        <ion-select formControlName="servicios_id" interface="popover" placeholder="Selecciona un servicio">
+          <ion-select-option *ngFor="let servicio of servicios" [value]="servicio.id">
+            {{ servicio.nombre }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+    </ion-list>
+    
+    <ion-button expand="block" type="submit" [disabled]="formularioCita.invalid" class="ion-margin-top">
+      Guardar Cambios
+    </ion-button>
+    
+  </form>
+
+</ion-content>

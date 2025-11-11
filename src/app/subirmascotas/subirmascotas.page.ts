@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Reserva } from '../../app/services/reserva';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';

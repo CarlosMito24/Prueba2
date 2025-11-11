@@ -64,6 +64,10 @@ const routes: Routes = [
     path: 'actualizarperfil',
     loadChildren: () => import('./actualizarperfil/actualizarperfil.module').then( m => m.ActualizarperfilPageModule)
   },
+  {
+    path: 'editarcita/:id',
+    loadChildren: () => import('./editarcita/editarcita.module').then( m => m.EditarcitaPageModule)
+  },
 ];
 
 @NgModule({

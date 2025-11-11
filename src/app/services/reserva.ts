@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginResponse } from '../interfaces/loginResponse';
-import { Observable } from 'rxjs'; // Necesario para el GET
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -62,17 +62,17 @@ export class Reserva {
     return this.http.get<any[]>(url, options);
   }
 
+  //Actualizar datos del usuario
   updateUserProfile(userData: any): Observable<any> {
     const token = localStorage.getItem('token');
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`, // Incluir el token
+        Authorization: `Bearer ${token}`,
       }),
     };
     const url = this.path_server + 'user/profile';
 
-    // 💡 La clave es usar this.http.put() y enviar 'userData' en el cuerpo
     return this.http.put(url, userData, options);
   }
 
@@ -156,5 +156,43 @@ export class Reserva {
 
     const url = this.path_server + 'citas';
     return this.http.post<any>(url, citaData, options);
+  }
+
+  // Función de ayuda para generar los encabezados con el token
+  private getAuthOptions(): { headers: HttpHeaders } {
+    const token = localStorage.getItem('token');
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+  }
+
+  //Editar Citas
+  getCitaPorId(id: number): Observable<any> {
+    // Si bien no definiste una ruta GET /citas/{id} explícita,
+    // es la convención RESTful. Si tu Laravel no tiene un método show,
+    // tendrías que filtrar desde getCitasUsuario(). Asumo el estándar aquí:
+    const url = this.path_server + `citas/${id}`;
+    return this.http.get<any>(url, this.getAuthOptions());
+  } // Coincide con tu ruta Laravel: PUT /citas/{id} -> CitaController@update
+
+  // 1. Editar Cita (UPDATE)
+  editarCita(id: number, citaData: any): Observable<any> {
+    const url = this.path_server + `citas/${id}`; // Usamos PUT como lo definiste en tus rutas API
+    return this.http.put<any>(url, citaData, this.getAuthOptions());
+  }
+
+  cancelarCita(id: number): Observable<any> {
+    const url = this.path_server + `citas/${id}/cancelar`;
+
+    // Asumimos que el backend espera el nuevo estado (e.g., 3 para cancelada)
+    // Este ID debe ser el que corresponda a "Cancelada" en tu tabla estado_citas
+    const datosCancelacion = {
+      estado_id: 3, // ¡CONFIRMA ESTE ID EN TU BASE DE DATOS!
+    }; // Usamos PATCH como lo definiste en tus rutas API
+
+    return this.http.patch<any>(url, datosCancelacion, this.getAuthOptions());
   }
 }

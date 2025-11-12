@@ -13,6 +13,7 @@ p {
   margin: 10px auto;
   box-sizing: border-box;
   padding: 10px;
+  box-shadow: 5px 5px #CCC;
 }
 
 .imagen-container {
@@ -35,6 +36,7 @@ p {
   margin: 10px auto;
   box-sizing: border-box;
   padding: 10px;
+  box-shadow: 5px 5px #CCC;
 }
 
 .citaspendientes {
@@ -69,4 +71,16 @@ h2 {
   --background: red;
   --color: #fff;
   width: 150px;
+}
+
+.mensaje {
+  text-align: center;
+  background-color: red;
+  width: 350px;
+  display: block;
+  margin: auto;
+  border-radius: 25px;
+  padding: 10px;
+  color: #fff;
+  box-shadow: 5px 5px #CCC;
 }

@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="crearCita()">
+  <form (ngSubmit)="crearCita()" class="formulario">
     <label>Fecha de la cita</label>
     <input type="date" placeholder="DD/MM/YYYY" required name="fecha" [(ngModel)]="cita.fecha" />
 

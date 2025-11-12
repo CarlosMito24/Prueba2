@@ -28,8 +28,6 @@ export class MismascotasPage implements OnInit {
     this.cargarMascotas();
   }
 
-  // --- Métodos de Carga y Utilidad (sin cambios) ---
-
   async cargarMascotas() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando tus mascotas...',
@@ -66,8 +64,6 @@ export class MismascotasPage implements OnInit {
     });
     toast.present();
   }
-  
-  // --- Lógica de Eliminación ---
 
   /**
    * Muestra un diálogo de confirmación antes de eliminar una mascota.
@@ -87,7 +83,7 @@ export class MismascotasPage implements OnInit {
         {
           text: 'Sí, Eliminar',
           handler: () => {
-            this.eliminarMascota(mascotaId); // Llama al método de eliminación
+            this.eliminarMascota(mascotaId); 
           },
         },
       ],
@@ -123,7 +119,6 @@ export class MismascotasPage implements OnInit {
       )
       .subscribe(() => {
         this.mostrarToast('Mascota eliminada correctamente.', 'success');
-        // Vuelve a cargar la lista para reflejar el cambio
         this.cargarMascotas(); 
       });
   }

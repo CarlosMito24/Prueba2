@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Reserva } from '../../app/services/reserva';
 import { catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { LoadingController, ToastController } from '@ionic/angular'; // <-- Agregado ToastController
+import { LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-citas',

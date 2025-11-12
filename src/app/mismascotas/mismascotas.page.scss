@@ -5,6 +5,7 @@
   margin: 10px auto;
   padding: 10px;
   box-sizing: border-box;
+  box-shadow: 5px 5px #ccc;
 }
 
 .mismascotas {
@@ -58,4 +59,16 @@ ion-button {
 
 p {
   margin: 10px;
+}
+
+.mensaje {
+  text-align: center;
+  background-color: red;
+  width: 350px;
+  display: block;
+  margin: auto;
+  border-radius: 25px;
+  padding: 10px;
+  color: #fff;
+  box-shadow: 5px 5px #ccc;
 }

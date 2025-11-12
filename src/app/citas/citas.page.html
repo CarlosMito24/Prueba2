@@ -12,17 +12,26 @@
 
   <h2>Historial</h2>
 
-  <div *ngFor="let citacompletada of citascompletadas">
-    <div class="citascompletadas">
-      <div class="imagen-container">
-        <img alt="Imagen de la mascota " class="imagen" [src]="'http://127.0.0.1:8000/images/' + citacompletada.mascota.imagen"/>
-      </div>
-      <div class="contenido-cita">
-        <p><strong>Fecha: </strong> {{citacompletada.fecha}}</p>
-        <p><strong>Hora: </strong> {{citacompletada.hora}}</p>
-        <p> <strong>Mascota: </strong>{{citacompletada.mascota.nombre}}</p>
-        <p><strong>Motivo: </strong> {{citacompletada.servicio.nombre}}</p>
+  <div *ngIf="citascompletadas.length === 0" class="mensaje">
+    <p>¡Aún no tienes citas completadas!</p>
+  </div>
+
+  <div *ngIf="citascompletadas.length > 0">
+    <div *ngFor="let citacompletada of citascompletadas">
+      <div class="citascompletadas">
+        <div class="imagen-container">
+          <img alt="Imagen de la mascota " class="imagen"
+            [src]="'http://127.0.0.1:8000/images/' + citacompletada.mascota.imagen" />
+        </div>
+        <div class="contenido-cita">
+          <p><strong>Fecha: </strong> {{citacompletada.fecha}}</p>
+          <p><strong>Hora: </strong> {{citacompletada.hora}}</p>
+          <p> <strong>Mascota: </strong>{{citacompletada.mascota.nombre}}</p>
+          <p><strong>Motivo: </strong> {{citacompletada.servicio.nombre}}</p>
+        </div>
       </div>
     </div>
   </div>
+
+
 </ion-content>

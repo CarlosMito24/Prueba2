@@ -1,13 +1,72 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>editarmascota</ion-title>
+    <ion-title>Editar Mascota: {{ mascotaActual?.nombre || 'Cargando...' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">editarmascota</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div *ngIf="!mascotaActual" class="ion-text-center ion-padding-top">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando datos de la mascota...</p>
+  </div>
+
+  <form [formGroup]="mascotaForm" (ngSubmit)="onSubmit()" *ngIf="mascotaActual">
+
+    <label>{{ imagenPrevisualizacionUrl ? 'Nueva Imagen (Previsualización)' : 'Imagen Actual' }}</label>
+    <div class="image-preview-container">
+      <img [src]="imagenPrevisualizacionUrl || imagenURLActual" alt="Imagen de la mascota"
+        style="width: 250px; height: 250px; object-fit: cover; border: none; border-radius: 25px; display: block; margin: auto;"
+        onerror="this.onerror=null; this.src='assets/default.png';">
+    </div>
+
+    <label>Nombre:</label>
+    <input type="text" placeholder="Nombre" formControlName="nombre" required />
+
+    <div
+      *ngIf="mascotaForm.get('nombre')?.invalid && (mascotaForm.get('nombre')?.dirty || mascotaForm.get('nombre')?.touched)">
+      <ion-text color="danger" class="error-message" *ngIf="mascotaForm.get('nombre')?.errors?.['required']">
+        El nombre es obligatorio.
+      </ion-text>
+    </div>
+
+    <label>Especie:</label>
+    <input type="text" placeholder="Especie" formControlName="especie" />
+
+    <label>Raza:</label>
+    <input type="text" placeholder="Raza" formControlName="raza" />
+
+    <label>Edad (En años):</label>
+    <input type="number" placeholder="Edad" formControlName="edad" />
+
+    <div
+      *ngIf="mascotaForm.get('edad')?.invalid && (mascotaForm.get('edad')?.dirty || mascotaForm.get('edad')?.touched)">
+      <ion-text color="danger" class="error-message"
+        *ngIf="mascotaForm.get('edad')?.errors?.['min'] || mascotaForm.get('edad')?.errors?.['max']">
+        La edad debe ser un número válido entre 0 y 30.
+      </ion-text>
+    </div>
+
+    <label>Cambiar Imagen
+      (Opcional)</label>
+
+    <input type="file" (change)="onFileChange($event)" accept="image/*" #fileInput class="hidden-file-input">
+    <ion-button (click)="fileInput.click()" fill="outline" size="small" class="ion-no-margin upload-button"
+      color="secondary">
+      <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
+      {{ imagenSeleccionada ? 'Seleccionar otra imagen' : 'Subir nueva imagen' }}
+    </ion-button>
+
+    <ion-text color="medium" class="file-name-display" *ngIf="imagenSeleccionada">
+      {{ imagenSeleccionada.name }}
+    </ion-text>
+    <ion-button *ngIf="imagenSeleccionada" (click)="clearNewImageSelection()" fill="clear" color="danger" size="small"
+      class="clear-button">
+      <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+    </ion-button>
+
+    <ion-button expand="block" type="submit" [disabled]="mascotaForm.invalid" shape="round">
+      Guardar Cambios
+      <ion-icon slot="end" name="save"></ion-icon>
+    </ion-button>
+  </form>
 </ion-content>

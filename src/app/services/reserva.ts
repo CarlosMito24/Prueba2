@@ -135,6 +135,8 @@ export class Reserva {
   //Mostrar Mascotas para crear cita
   subirMascotas(mascotaData: any): Observable<any> {
     const token = localStorage.getItem('token');
+    // Nota: No se usa 'Content-Type': 'application/json' porque esta función usa FormData
+    // para manejar la imagen, así que Angular la establece automáticamente como 'multipart/form-data'.
     const options = {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`,
@@ -158,15 +160,19 @@ export class Reserva {
     return this.http.post<any>(url, citaData, options);
   }
 
-  // Función de ayuda para generar los encabezados con el token
-  private getAuthOptions(): { headers: HttpHeaders } {
+// Función de ayuda para generar los encabezados con el token
+  private getAuthOptions(contentType: 'json' | 'form' = 'json'): { headers: HttpHeaders } {
     const token = localStorage.getItem('token');
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
+    let headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    // Solo se añade 'application/json' si se requiere (para peticiones que no llevan FormData)
+    if (contentType === 'json') {
+        headers = headers.set('Content-Type', 'application/json');
+    }
+    
+    return { headers };
   }
 
   //Editar Citas
@@ -193,5 +199,27 @@ export class Reserva {
   eliminarMascota(id: number): Observable<any> {
     const url = this.path_server + `mascotas/${id}`
     return this.http.delete<any>(url, this.getAuthOptions());
+  }
+
+  getMascotaPorId(id: number): Observable<any> {
+    const url = this.path_server + `mascotas/${id}`;
+    // Usamos 'json' porque esta es una petición GET simple que devuelve JSON.
+    return this.http.get<any>(url, this.getAuthOptions('json'));
+  }
+
+  /**
+   * Actualiza los datos de una mascota específica (PUT /mascotas/{id}).
+   * NOTA: Esta función debe recibir FormData si incluye una imagen.
+   * @param id El ID de la mascota a actualizar.
+   * @param mascotaData Los datos de la mascota (puede ser JSON o FormData).
+   */
+  editarMascota(id: number, mascotaData: any): Observable<any> {
+    const url = this.path_server + `mascotas/${id}`;
+    // Usamos 'form' aquí porque el endpoint de edición de mascotas en Laravel
+    // acepta datos tanto JSON como FormData (para la imagen). Al usar 'form',
+    // nos aseguramos de no forzar el encabezado 'Content-Type' a 'application/json',
+    // dejando que Angular/navegador lo maneje automáticamente como 'multipart/form-data'
+    // si se le pasa un objeto FormData. Si se le pasa un objeto plano, Laravel lo acepta.
+    return this.http.post<any>(url, mascotaData, this.getAuthOptions('form'));
   }
 }

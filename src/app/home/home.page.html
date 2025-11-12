@@ -5,14 +5,16 @@
 </ion-header>
 
 <ion-content>
+  <h2>¡Bienvenido a Pet Care SV!</h2>
   <p>
-    Somos Pet Care SV, una veterinaria y peluqueria para mascotas salvadoreña
-    con el propósito de cuidar a tus mascotas y darte un servicio de calidad.
+    Somos tu veterinaria y peluquería salvadoreña de confianza. Nacimos con el propósito de ofrecer a tus mejores amigos
+    peludos una atención integral y de calidad, combinando la salud con el bienestar en un solo lugar. Confía en
+    nosotros para cuidar de tu mascota como si fuera nuestra.
   </p>
 
   <h2>Citas Pendientes </h2>
   <div *ngIf="citaspendientes.length === 0" class="mensaje">
-    <p>¡Nos tienes citas pendientes!</p>
+    <p>¡No tienes citas pendientes!</p>
   </div>
   <div *ngIf="citaspendientes.length > 0">
     <div *ngFor="let citaspendiente of citaspendientes">
@@ -27,6 +29,7 @@
             <p><strong>Hora: </strong> {{citaspendiente.hora}}</p>
             <p> <strong>Mascota: </strong>{{citaspendiente.mascota.nombre}}</p>
             <p><strong>Motivo: </strong> {{citaspendiente.servicio.nombre}}</p>
+            <p><strong>Estado: </strong>{{citaspendiente.estado.nombre}}</p>
           </div>
         </div>
         <div class="botones">
@@ -38,9 +41,8 @@
     </div>
   </div>
 
-
-
-  <p>Los servicios que ofrecemos son los siguientes</p>
+  <h2>Nuestros Servicios para tu Mascota</h2>
+  <p style="text-align: center;">Los servicios que ofrecemos son los siguientes:</p>
 
   <div *ngFor="let servicio of servicios">
     <div class="servicios">

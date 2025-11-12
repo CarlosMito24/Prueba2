@@ -18,7 +18,7 @@ export class SubirmascotasPage implements OnInit {
     nombre: '',
     especie: '',
     raza: '',
-    edad: '',
+    edad: null as unknown as number | null, // Inicialízalo como null o 0
   };
 
   imagen: File | null = null;
@@ -44,29 +44,33 @@ export class SubirmascotasPage implements OnInit {
   }
 
   crearMascota() {
-    if (
-      !this.mascota.nombre ||
-      !this.mascota.especie ||
-      !this.mascota.raza ||
-      !this.mascota.edad
-    ) {
-      this.mostrarToast(
-        'Por favor, completa todos los campos requeridos.',
-        'warning'
-      );
+    if (!this.mascota.nombre) {
+      this.mostrarToast('El nombre de la mascota es obligatorio.', 'warning');
       return;
     }
 
     const formData = new FormData();
 
     formData.append('nombre', this.mascota.nombre);
-    formData.append('especie', this.mascota.especie);
-    formData.append('raza', this.mascota.raza);
-    formData.append('edad', this.mascota.edad);
+
+    if (this.mascota.especie) {
+      formData.append('especie', this.mascota.especie);
+    }
+    if (this.mascota.raza) {
+      formData.append('raza', this.mascota.raza);
+    }
+    // Convertir a string antes de adjuntar, y asegurar que se adjunte
+    if (
+      this.mascota.edad !== null &&
+      this.mascota.edad !== undefined &&
+      String(this.mascota.edad) !== ''
+    ) {
+      formData.append('edad', String(this.mascota.edad));
+    }
+
     if (this.imagen) {
       formData.append('imagen', this.imagen);
     }
-
     this.reservaService
       .subirMascotas(formData)
       .pipe(
@@ -98,7 +102,7 @@ export class SubirmascotasPage implements OnInit {
             nombre: '',
             especie: '',
             raza: '',
-            edad: '',
+            edad: null,
           };
         }
       });

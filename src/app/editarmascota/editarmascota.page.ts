@@ -52,7 +52,10 @@ export class EditarmascotaPage implements OnInit {
       nombre: ['', [Validators.required, Validators.maxLength(255)]],
       especie: [''],
       raza: [''],
-      edad: [null, [Validators.min(0), Validators.max(30)]],
+      edad: [
+        null as unknown as number | null,
+        [Validators.min(0), Validators.max(30)],
+      ],
       imagen: [null],
     });
   }
@@ -116,13 +119,12 @@ export class EditarmascotaPage implements OnInit {
     }
 
     const formData = new FormData();
-
     formData.append('_method', 'PUT');
-
     Object.keys(this.mascotaForm.controls).forEach((key) => {
-      const value = this.mascotaForm.get(key)?.value;
-      if (value !== null && key !== 'imagen') {
-        formData.append(key, value);
+      if (key !== 'imagen') {
+        const value = this.mascotaForm.get(key)?.value;
+        const finalValue = value === null || value === undefined ? '' : value;
+        formData.append(key, String(finalValue));
       }
     });
 
@@ -143,10 +145,12 @@ export class EditarmascotaPage implements OnInit {
         this.navCtrl.navigateRoot('/mismascotas');
       },
       error: (err) => {
-        this.presentToast(
-          'Error al actualizar la mascota. Verifica los datos.',
-          'danger'
-        );
+        let errorMessage =
+          'Error al actualizar la mascota. Verifica los datos.';
+        if (err.error?.message) {
+          errorMessage = err.error.message;
+        }
+        this.presentToast(errorMessage, 'danger');
       },
     });
   }

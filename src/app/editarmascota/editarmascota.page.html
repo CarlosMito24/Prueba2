@@ -20,7 +20,7 @@
     </div>
 
     <label>Nombre:</label>
-    <input type="text" placeholder="Nombre" formControlName="nombre" required />
+    <input type="text" placeholder="Nombre" formControlName="nombre" />
 
     <div
       *ngIf="mascotaForm.get('nombre')?.invalid && (mascotaForm.get('nombre')?.dirty || mascotaForm.get('nombre')?.touched)">
@@ -59,7 +59,7 @@
     <ion-text color="medium" class="file-name-display" *ngIf="imagenSeleccionada">
       {{ imagenSeleccionada.name }}
     </ion-text>
-    <ion-button *ngIf="imagenSeleccionada" (click)="clearNewImageSelection()" fill="clear" color="danger" size="small"
+    <ion-button *ngIf="imagenSeleccionada" (click)="clearNewImageSelection()" fill="clear" color="danger"
       class="clear-button">
       <ion-icon slot="icon-only" name="close-circle"></ion-icon>
     </ion-button>

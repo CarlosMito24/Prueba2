@@ -41,6 +41,7 @@ export class HomePage implements OnInit {
     }
     
     const loading = await this.loadingCtrl.create({
+      cssClass: 'custom-loading',
       message: 'Cargando datos...',
     });
     await loading.present();

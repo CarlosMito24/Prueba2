@@ -30,6 +30,7 @@ export class MismascotasPage implements OnInit {
 
   async cargarMascotas() {
     const loading = await this.loadingCtrl.create({
+      cssClass: 'custom-loading',
       message: 'Cargando tus mascotas...',
       spinner: 'crescent',
     });
@@ -98,6 +99,7 @@ export class MismascotasPage implements OnInit {
    */
   async eliminarMascota(id: number) {
     const loading = await this.loadingCtrl.create({
+      cssClass: 'custom-loading',
       message: 'Eliminando mascota...',
       spinner: 'crescent',
     });

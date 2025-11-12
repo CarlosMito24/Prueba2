@@ -2,6 +2,10 @@ ion-content {
   --background: linear-gradient(to right, #cdffd8, #94b9ff);
 }
 
+form {
+  background: none !important;
+}
+
 ion-icon {
   margin-right: 10px;
 }
@@ -28,10 +32,18 @@ input {
   height: 40px;
   display: block;
   box-shadow: none;
-  border: solid 1px #000;
+  border: none;
   background-color: #fff;
   padding: 10px;
   box-sizing: border-box;
   color: #000;
+  text-align: center;
+}
+
+.span {
+  color: red;
+  display: block;
+  margin: auto;
+  font-size: 12px;
   text-align: center;
 }

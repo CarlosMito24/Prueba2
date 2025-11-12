@@ -4,16 +4,15 @@ p {
 
 .servicios {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
   align-items: center;
   border-radius: 25px;
   width: 350px;
-  height: 200px;
+  height: 225px;
   background: linear-gradient(to right, #3bb04f, #1ae6bb);
   margin: 10px auto;
   box-sizing: border-box;
-  padding: 10px;
-  box-shadow: 5px 5px #CCC;
+  padding: 10px
 }
 
 .imagen-container {
@@ -36,12 +35,11 @@ p {
   margin: 10px auto;
   box-sizing: border-box;
   padding: 10px;
-  box-shadow: 5px 5px #CCC;
 }
 
 .citaspendientes {
   display: flex;  
-  justify-content: space-evenly;
+  justify-content: start;
   align-items: center;
   box-sizing: border-box;
 }
@@ -88,5 +86,4 @@ h2 {
   border-radius: 25px;
   padding: 10px;
   color: #fff;
-  box-shadow: 5px 5px #CCC;
 }

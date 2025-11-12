@@ -52,7 +52,9 @@
       <div class="contenido-servicio">
         <p><strong>{{servicio.nombre}}</strong></p>
         <p>{{servicio.descripcion}}</p>
-        <p>Precio: {{servicio.precio}}</p>
+        <p *ngIf="servicio.precio"><strong>Precio: </strong> {{servicio.precio}}</p>
+
+        <p *ngIf="!servicio.precio"><strong>Precio: </strong> A Consultar</p>
       </div>
     </div>
   </div>

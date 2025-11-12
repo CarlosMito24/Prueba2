@@ -34,6 +34,7 @@ export class ActualizarperfilPage implements OnInit {
 
   async obtenerDatos() {
     const loading = await this.loadingCtrl.create({
+      cssClass: 'custom-loading',
       message: 'Cargando perfil...',
     });
     await loading.present();

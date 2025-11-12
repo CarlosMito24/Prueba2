@@ -5,7 +5,8 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-button shape="round" routerLink="/subirmascotas">Subir Mascota</ion-button>
+  <ion-button shape="round" routerLink="/subirmascotas">
+    <ion-icon slot="start" name="add-circle"></ion-icon>Subir Mascota</ion-button>
   <div *ngIf="mascotas.length === 0" class="mensaje">
     <p>¡Aún no tienes mascotas registradas!</p>
     <p>Presiona el botón "Subir Mascota" para agregar la primera.</p>

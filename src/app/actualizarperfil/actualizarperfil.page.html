@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Mi Perfil</ion-title>
+    <ion-title>Actualizar Información Personal</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,6 +25,10 @@
     <input type="text" placeholder="Ejemplo@correo.com" [(ngModel)]="usuario.email" name="email" required />
 
     <label>Contraseña:</label>
+        <div class="span">
+      <span>*Debe tener al menos 8 carácteres*</span> <br/>
+      <span>*Deja este espacio en blanco sino la deseas cammbiar*</span>
+    </div>
     <input type="password" placeholder="Contraseña" [(ngModel)]="usuario.password" name="password"/>
 
 

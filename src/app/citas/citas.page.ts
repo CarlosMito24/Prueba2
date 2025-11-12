@@ -29,6 +29,7 @@ export class CitasPage implements OnInit {
 
   async cargarCitasCompletadas() {
     const loading = await this.loadingCtrl.create({
+      cssClass: 'custom-loading',
       message: 'Cargando historial...',
     });
     await loading.present();

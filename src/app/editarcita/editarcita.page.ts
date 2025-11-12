@@ -43,6 +43,7 @@ export class EditarcitaPage implements OnInit {
 
   async cargarDatosIniciales() {
     const loading = await this.loadingCtrl.create({
+      cssClass: 'custom-loading',
       message: 'Cargando datos de la cita...',
       spinner: 'crescent',
     });
@@ -97,6 +98,7 @@ export class EditarcitaPage implements OnInit {
     }
 
     const loading = await this.loadingCtrl.create({
+      cssClass: 'custom-loading',
       message: 'Guardando cambios...',
       spinner: 'crescent',
     });

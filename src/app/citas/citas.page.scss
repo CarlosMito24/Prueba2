@@ -4,13 +4,13 @@
     background: linear-gradient(to right, #cdffd8, #539d96);
     padding: 10px;
     margin: 10px auto;
-    box-shadow: 5px 5px #CCC;
 }
 
 ion-button{
     display: block;
     margin: 10px auto;
     width: 250px;
+    --color: #FFF;
 }
 
 .crear img {
@@ -23,7 +23,7 @@ ion-button{
 
 .citascompletadas {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
   align-items: center;
   border-radius: 25px;
   width: 350px;
@@ -32,7 +32,6 @@ ion-button{
   margin: 10px auto;
   padding: 0 10px;
   box-sizing: border-box;
-  box-shadow: 5px 5px #CCC;
 }
 
 h2{
@@ -48,6 +47,7 @@ h2{
 .imagen-container {
   overflow: hidden;
   flex-shrink: 0;
+  margin-right: 10px;
 }
 
 .imagen {
@@ -67,5 +67,4 @@ h2{
   border-radius: 25px;
   padding: 10px;
   color: #fff;
-  box-shadow: 5px 5px #CCC;
 }

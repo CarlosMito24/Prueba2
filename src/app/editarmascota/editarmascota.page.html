@@ -5,11 +5,6 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="!mascotaActual" class="ion-text-center ion-padding-top">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Cargando datos de la mascota...</p>
-  </div>
-
   <form [formGroup]="mascotaForm" (ngSubmit)="onSubmit()" *ngIf="mascotaActual">
 
     <label>{{ imagenPrevisualizacionUrl ? 'Nueva Imagen (Previsualización)' : 'Imagen Actual' }}</label>
@@ -50,8 +45,7 @@
       (Opcional)</label>
 
     <input type="file" (change)="onFileChange($event)" accept="image/*" #fileInput class="hidden-file-input">
-    <ion-button (click)="fileInput.click()" fill="outline" size="small" class="ion-no-margin upload-button"
-      color="secondary">
+    <ion-button (click)="fileInput.click()" shape="round">
       <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
       {{ imagenSeleccionada ? 'Seleccionar otra imagen' : 'Subir nueva imagen' }}
     </ion-button>
@@ -66,7 +60,7 @@
 
     <ion-button expand="block" type="submit" [disabled]="mascotaForm.invalid" shape="round">
       Guardar Cambios
-      <ion-icon slot="end" name="save"></ion-icon>
+      <ion-icon slot="start" name="save"></ion-icon>
     </ion-button>
   </form>
 </ion-content>

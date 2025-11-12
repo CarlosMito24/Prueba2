@@ -5,12 +5,11 @@
   margin: 10px auto;
   padding: 10px;
   box-sizing: border-box;
-  box-shadow: 5px 5px #ccc;
 }
 
 .mismascotas {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
   align-items: center;
   box-sizing: border-box;
 }
@@ -70,5 +69,4 @@ p {
   border-radius: 25px;
   padding: 10px;
   color: #fff;
-  box-shadow: 5px 5px #ccc;
 }

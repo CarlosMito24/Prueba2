@@ -5,8 +5,10 @@ import {
   NavController,
   AlertController,
   ToastController,
+  LoadingController,
 } from '@ionic/angular';
 import { Reserva } from 'src/app/services/reserva';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-editarmascota',
@@ -29,7 +31,8 @@ export class EditarmascotaPage implements OnInit {
     private reservaService: Reserva,
     private navCtrl: NavController,
     private alertController: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private loadingController: LoadingController,
   ) {
     this.initForm();
   }
@@ -60,23 +63,37 @@ export class EditarmascotaPage implements OnInit {
     });
   }
 
-  cargarMascota(id: number) {
-    this.reservaService.getMascotaPorId(id).subscribe({
-      next: (data) => {
-        this.mascotaActual = data;
-        this.imagenURLActual = this.servidorUrl + data.imagen;
-        this.mascotaForm.patchValue({
-          nombre: data.nombre,
-          especie: data.especie,
-          raza: data.raza,
-          edad: data.edad,
-        });
-      },
-      error: (error) => {
-        this.presentToast('Error al cargar los datos de la mascota.', 'danger');
-        this.navCtrl.back();
-      },
+  async cargarMascota(id: number) {
+    const loading = await this.loadingController.create({
+      message: 'Cargando datos de la mascota...',
+      spinner: 'crescent', // Usamos un spinner visualmente atractivo
+      cssClass: 'custom-loading' // Usa la clase CSS global que definiste antes
     });
+    await loading.present();
+
+    this.reservaService.getMascotaPorId(id)
+      .pipe(
+        finalize(() => {
+          // Oculta el loading cuando la petición termina (éxito o error)
+          loading.dismiss(); 
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          this.mascotaActual = data;
+          this.imagenURLActual = this.servidorUrl + data.imagen;
+          this.mascotaForm.patchValue({
+            nombre: data.nombre,
+            especie: data.especie,
+            raza: data.raza,
+            edad: data.edad,
+          });
+        },
+        error: (error) => {
+          this.presentToast('Error al cargar los datos de la mascota.', 'danger');
+          this.navCtrl.back();
+        },
+      });
   }
 
   onFileChange(event: any) {

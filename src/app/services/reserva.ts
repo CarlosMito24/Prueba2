@@ -171,28 +171,27 @@ export class Reserva {
 
   //Editar Citas
   getCitaPorId(id: number): Observable<any> {
-    // Si bien no definiste una ruta GET /citas/{id} explícita,
-    // es la convención RESTful. Si tu Laravel no tiene un método show,
-    // tendrías que filtrar desde getCitasUsuario(). Asumo el estándar aquí:
     const url = this.path_server + `citas/${id}`;
     return this.http.get<any>(url, this.getAuthOptions());
-  } // Coincide con tu ruta Laravel: PUT /citas/{id} -> CitaController@update
+  }
 
-  // 1. Editar Cita (UPDATE)
   editarCita(id: number, citaData: any): Observable<any> {
-    const url = this.path_server + `citas/${id}`; // Usamos PUT como lo definiste en tus rutas API
+    const url = this.path_server + `citas/${id}`;
     return this.http.put<any>(url, citaData, this.getAuthOptions());
   }
 
   cancelarCita(id: number): Observable<any> {
     const url = this.path_server + `citas/${id}/cancelar`;
 
-    // Asumimos que el backend espera el nuevo estado (e.g., 3 para cancelada)
-    // Este ID debe ser el que corresponda a "Cancelada" en tu tabla estado_citas
     const datosCancelacion = {
-      estado_id: 3, // ¡CONFIRMA ESTE ID EN TU BASE DE DATOS!
-    }; // Usamos PATCH como lo definiste en tus rutas API
+      estado_id: 3,
+    };
 
     return this.http.patch<any>(url, datosCancelacion, this.getAuthOptions());
+  }
+
+  eliminarMascota(id: number): Observable<any> {
+    const url = this.path_server + `mascotas/${id}`
+    return this.http.delete<any>(url, this.getAuthOptions());
   }
 }

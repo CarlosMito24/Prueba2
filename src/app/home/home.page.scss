@@ -62,28 +62,11 @@ h2 {
 .editar {
   --background: #3bb04f;
   --color: #fff;
+  width: 150px;
 }
 
 .cancelar {
   --background: red;
   --color: #fff;
-}
-
-.loading-container {
-  /* Posicionamiento absoluto para que ocupe todo el espacio de ion-content */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  
-  /* Flexbox para centrar el contenido (spinner y texto) */
-  display: flex;
-  flex-direction: column; /* Apila el spinner y el texto */
-  justify-content: center; /* Centrado vertical */
-  align-items: center; /* Centrado horizontal */
-  
-  /* Opcional: Asegura que el color de fondo sea el mismo */
-  background: var(--ion-background-color, #ffffff); 
-  z-index: 10; /* Asegura que el loading esté encima de cualquier cosa */
+  width: 150px;
 }

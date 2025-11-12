@@ -15,7 +15,7 @@
   <div *ngFor="let citacompletada of citascompletadas">
     <div class="citascompletadas">
       <div class="imagen-container">
-        <img alt="Imagen de la mascota " class="imagen" />
+        <img alt="Imagen de la mascota " class="imagen" [src]="'http://127.0.0.1:8000/images/' + citacompletada.mascota.imagen"/>
       </div>
       <div class="contenido-cita">
         <p><strong>Fecha: </strong> {{citacompletada.fecha}}</p>

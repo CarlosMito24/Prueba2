@@ -9,7 +9,7 @@ import { filter } from 'rxjs/operators';
   standalone : false,
 })
 export class AppComponent {
-  showMenu = true; // visible por defecto
+  showMenu = true;
 
   constructor(private router: Router) {
     this.router.events

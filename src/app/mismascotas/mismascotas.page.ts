@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Reserva } from '../../app/services/reserva';
 import { catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ToastController, LoadingController } from '@ionic/angular'; // <-- Importamos LoadingController
+import { ToastController, LoadingController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +18,8 @@ export class MismascotasPage implements OnInit {
     private reservaService: Reserva,
     private toastCtrl: ToastController,
     private router: Router,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
   ) {}
 
   ngOnInit() {}
@@ -26,6 +27,8 @@ export class MismascotasPage implements OnInit {
   ionViewWillEnter() {
     this.cargarMascotas();
   }
+
+  // --- Métodos de Carga y Utilidad (sin cambios) ---
 
   async cargarMascotas() {
     const loading = await this.loadingCtrl.create({
@@ -62,5 +65,66 @@ export class MismascotasPage implements OnInit {
       position: 'bottom',
     });
     toast.present();
+  }
+  
+  // --- Lógica de Eliminación ---
+
+  /**
+   * Muestra un diálogo de confirmación antes de eliminar una mascota.
+   * @param mascotaId ID de la mascota a eliminar.
+   */
+  async confirmarEliminacion(mascotaId: number) {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmar Eliminación',
+      message:
+        '¿Estás seguro de que deseas eliminar esta mascota? Esta acción no se puede deshacer y se eliminarán sus datos asociados.',
+      buttons: [
+        {
+          text: 'No, mantener',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Sí, Eliminar',
+          handler: () => {
+            this.eliminarMascota(mascotaId); // Llama al método de eliminación
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+
+  /**
+   * Llama al servicio para eliminar la mascota y actualiza la lista.
+   * @param id ID de la mascota a eliminar.
+   */
+  async eliminarMascota(id: number) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Eliminando mascota...',
+      spinner: 'crescent',
+    });
+    await loading.present();
+
+    this.reservaService
+      .eliminarMascota(id)
+      .pipe(
+        finalize(async () => {
+          await loading.dismiss();
+        }),
+        catchError((error) => {
+          this.mostrarToast(
+            'Error al eliminar la mascota. Intente nuevamente.',
+            'danger'
+          );
+          return of(null);
+        })
+      )
+      .subscribe(() => {
+        this.mostrarToast('Mascota eliminada correctamente.', 'success');
+        // Vuelve a cargar la lista para reflejar el cambio
+        this.cargarMascotas(); 
+      });
   }
 }

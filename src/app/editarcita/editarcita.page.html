@@ -8,7 +8,7 @@
   
   <form [formGroup]="formularioCita" (ngSubmit)="guardarCambios()">
     <label>Fecha de la cita</label>
-    <input type="date" placeholder="DD/MM/YYYY" required formControlName="fecha" required />
+    <input type="date" placeholder="DD/MM/YYYY" required formControlName="fecha" />
 
     <label>Hora de la cita</label>
     <input type="time" required formControlName="hora" />

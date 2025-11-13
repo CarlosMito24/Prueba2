@@ -47,7 +47,7 @@
   <div *ngFor="let servicio of servicios">
     <div class="servicios">
       <div class="imagen-container">
-        <img alt="Imagen del servicio" [src]="'http://127.0.0.1:8000/servicios/' + servicio.imagen" class="imagen" />
+        <img alt="Imagen del servicio" [src]="'http://127.0.0.1:8000/images/' + servicio.imagen" class="imagen" />
       </div>
       <div class="contenido-servicio">
         <p><strong>{{servicio.nombre}}</strong></p>

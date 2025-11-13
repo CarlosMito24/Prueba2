@@ -21,15 +21,19 @@ export class RegistroPage implements OnInit {
     password: '',
   };
 
-  constructor(
-    private toastCtrl: ToastController,
-    private router: Router
-  ) {}
+  constructor(private toastCtrl: ToastController, private router: Router) {}
 
   ngOnInit() {}
 
   async crearUsuario() {
-    if (!this.usuario.nombres || !this.usuario.apellidos) {
+    if (
+      !this.usuario.nombres ||
+      !this.usuario.apellidos ||
+      !this.usuario.telefono ||
+      !this.usuario.fecha_nacimiento ||
+      !this.usuario.email ||
+      !this.usuario.password
+    ) {
       await this.mostrarToast(
         'Por favor, completa todos los campos requeridos.',
         'warning'

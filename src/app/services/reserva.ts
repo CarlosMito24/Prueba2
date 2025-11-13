@@ -135,8 +135,6 @@ export class Reserva {
   //Mostrar Mascotas para crear cita
   subirMascotas(mascotaData: any): Observable<any> {
     const token = localStorage.getItem('token');
-    // Nota: No se usa 'Content-Type': 'application/json' porque esta función usa FormData
-    // para manejar la imagen, así que Angular la establece automáticamente como 'multipart/form-data'.
     const options = {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`,
@@ -203,7 +201,6 @@ export class Reserva {
 
   getMascotaPorId(id: number): Observable<any> {
     const url = this.path_server + `mascotas/${id}`;
-    // Usamos 'json' porque esta es una petición GET simple que devuelve JSON.
     return this.http.get<any>(url, this.getAuthOptions('json'));
   }
 
@@ -215,11 +212,6 @@ export class Reserva {
    */
   editarMascota(id: number, mascotaData: any): Observable<any> {
     const url = this.path_server + `mascotas/${id}`;
-    // Usamos 'form' aquí porque el endpoint de edición de mascotas en Laravel
-    // acepta datos tanto JSON como FormData (para la imagen). Al usar 'form',
-    // nos aseguramos de no forzar el encabezado 'Content-Type' a 'application/json',
-    // dejando que Angular/navegador lo maneje automáticamente como 'multipart/form-data'
-    // si se le pasa un objeto FormData. Si se le pasa un objeto plano, Laravel lo acepta.
     return this.http.post<any>(url, mascotaData, this.getAuthOptions('form'));
   }
 }
